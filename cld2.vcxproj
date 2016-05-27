@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cld2\internal\cld2_dynamic_data.cc" />
+    <ClCompile Include="cld2\internal\cld2_dynamic_data_extractor.cc" />
+    <ClCompile Include="cld2\internal\cld2_dynamic_data_loader.cc" />
+    <ClCompile Include="cld2\internal\cld2_generated_cjk_compatible.cc" />
+    <ClCompile Include="cld2\internal\cld2_generated_deltaocta0122.cc" />
+    <ClCompile Include="cld2\internal\cld2_generated_distinctocta0122.cc" />
+    <ClCompile Include="cld2\internal\cld2_generated_octa2_dummy.cc" />
+    <ClCompile Include="cld2\internal\cld2_generated_quad0122.cc" />
+    <ClCompile Include="cld2\internal\cldutil.cc" />
+    <ClCompile Include="cld2\internal\cldutil_shared.cc" />
+    <ClCompile Include="cld2\internal\cld_generated_cjk_delta_bi_32.cc" />
+    <ClCompile Include="cld2\internal\cld_generated_cjk_uni_prop_80.cc" />
+    <ClCompile Include="cld2\internal\cld_generated_score_quad_octa_2.cc" />
+    <ClCompile Include="cld2\internal\compact_lang_det.cc" />
+    <ClCompile Include="cld2\internal\compact_lang_det_hint_code.cc" />
+    <ClCompile Include="cld2\internal\compact_lang_det_impl.cc" />
+    <ClCompile Include="cld2\internal\debug_empty.cc" />
+    <ClCompile Include="cld2\internal\fixunicodevalue.cc" />
+    <ClCompile Include="cld2\internal\generated_distinct_bi_0.cc" />
+    <ClCompile Include="cld2\internal\generated_entities.cc" />
+    <ClCompile Include="cld2\internal\generated_language.cc" />
+    <ClCompile Include="cld2\internal\generated_ulscript.cc" />
+    <ClCompile Include="cld2\internal\getonescriptspan.cc" />
+    <ClCompile Include="cld2\internal\lang_script.cc" />
+    <ClCompile Include="cld2\internal\offsetmap.cc" />
+    <ClCompile Include="cld2\internal\scoreonescriptspan.cc" />
+    <ClCompile Include="cld2\internal\tote.cc" />
+    <ClCompile Include="cld2\internal\utf8statetable.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cld2\internal\cld2tablesummary.h" />
+    <ClInclude Include="cld2\internal\cld2_dynamic_compat.h" />
+    <ClInclude Include="cld2\internal\cld2_dynamic_data.h" />
+    <ClInclude Include="cld2\internal\cld2_dynamic_data_extractor.h" />
+    <ClInclude Include="cld2\internal\cld2_dynamic_data_loader.h" />
+    <ClInclude Include="cld2\internal\cldutil.h" />
+    <ClInclude Include="cld2\internal\cldutil_shared.h" />
+    <ClInclude Include="cld2\internal\compact_lang_det_hint_code.h" />
+    <ClInclude Include="cld2\internal\compact_lang_det_impl.h" />
+    <ClInclude Include="cld2\internal\fixunicodevalue.h" />
+    <ClInclude Include="cld2\internal\generated_language.h" />
+    <ClInclude Include="cld2\internal\generated_ulscript.h" />
+    <ClInclude Include="cld2\internal\getonescriptspan.h" />
+    <ClInclude Include="cld2\internal\integral_types.h" />
+    <ClInclude Include="cld2\internal\langspan.h" />
+    <ClInclude Include="cld2\internal\lang_script.h" />
+    <ClInclude Include="cld2\internal\offsetmap.h" />
+    <ClInclude Include="cld2\internal\port.h" />
+    <ClInclude Include="cld2\internal\scoreonescriptspan.h" />
+    <ClInclude Include="cld2\internal\stringpiece.h" />
+    <ClInclude Include="cld2\internal\tote.h" />
+    <ClInclude Include="cld2\internal\utf8acceptinterchange.h" />
+    <ClInclude Include="cld2\internal\utf8prop_lettermarkscriptnum.h" />
+    <ClInclude Include="cld2\internal\utf8repl_lettermarklower.h" />
+    <ClInclude Include="cld2\internal\utf8scannot_lettermarkspecial.h" />
+    <ClInclude Include="cld2\internal\utf8statetable.h" />
+    <ClInclude Include="cld2\public\compact_lang_det.h" />
+    <ClInclude Include="cld2\public\encodings.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cld2_deploy.ps1" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E74338DB-F031-4E10-81B2-0F2B3C52DB38}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libogg</RootNamespace>
+    <ProjectName>cld2</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>../_dist/lib/</OutDir>
+    <IntDir>../_int/$(ProjectName)_$(Configuration)/</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>../_dist/lib/</OutDir>
+    <IntDir>../_int/$(ProjectName)_$(Configuration)/</IntDir>
+    <TargetName>$(ProjectName)_release</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;CLD_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <AdditionalIncludeDirectories>./;./cld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DisableSpecificWarnings>4267;4996;4244;4800;4101</DisableSpecificWarnings>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)\%(RelativeDir)</ObjectFileName>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>powershell Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+powershell -File $(ProjectName)_deploy.ps1</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;CLD_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./;./cld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4267;4996;4244;4800;4101</DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <ObjectFileName>$(IntDir)\%(RelativeDir)</ObjectFileName>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <ForcedIncludeFiles>_alloc_redefine.h</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PostBuildEvent>
+      <Command>powershell Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+powershell -File $(ProjectName)_deploy.ps1</Command>
+    </PostBuildEvent>
+    <Lib />
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

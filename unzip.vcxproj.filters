@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="unzip">
+      <UniqueIdentifier>{fc4dee57-dd6a-4af5-b69a-71133d8bcd8d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="unzip\crypt.h">
+      <Filter>unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="unzip\ioapi.h">
+      <Filter>unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="unzip\iowin32.h">
+      <Filter>unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="unzip\mztools.h">
+      <Filter>unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="unzip\unzip.h">
+      <Filter>unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="unzip\zip.h">
+      <Filter>unzip</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="unzip\ioapi.c">
+      <Filter>unzip</Filter>
+    </ClCompile>
+    <ClCompile Include="unzip\iowin32.c">
+      <Filter>unzip</Filter>
+    </ClCompile>
+    <ClCompile Include="unzip\mztools.c">
+      <Filter>unzip</Filter>
+    </ClCompile>
+    <ClCompile Include="unzip\unzip.c">
+      <Filter>unzip</Filter>
+    </ClCompile>
+    <ClCompile Include="unzip\zip.c">
+      <Filter>unzip</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

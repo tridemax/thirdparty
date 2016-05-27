@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="cld2">
+      <UniqueIdentifier>{92107677-11fd-4157-85d2-d8a8e655c6d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cld2\internal">
+      <UniqueIdentifier>{d3e04138-5c6d-4030-a449-7ea1d9700e39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cld2\public">
+      <UniqueIdentifier>{086095c8-ee72-426e-be5f-61fe6ffcf7bb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cld2\internal\cld_generated_cjk_delta_bi_32.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cld_generated_cjk_uni_prop_80.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cld_generated_score_quad_octa_2.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cld2_dynamic_data.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cld2_dynamic_data_extractor.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cld2_dynamic_data_loader.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cld2_generated_cjk_compatible.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cld2_generated_deltaocta0122.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cld2_generated_distinctocta0122.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cld2_generated_octa2_dummy.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cld2_generated_quad0122.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cldutil.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\cldutil_shared.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\compact_lang_det.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\compact_lang_det_hint_code.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\compact_lang_det_impl.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\fixunicodevalue.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\generated_distinct_bi_0.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\generated_entities.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\generated_language.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\generated_ulscript.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\getonescriptspan.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\lang_script.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\offsetmap.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\scoreonescriptspan.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\tote.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\utf8statetable.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="cld2\internal\debug_empty.cc">
+      <Filter>cld2\internal</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cld2\internal\cld2_dynamic_compat.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\cld2_dynamic_data.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\cld2_dynamic_data_extractor.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\cld2_dynamic_data_loader.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\cld2tablesummary.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\cldutil.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\cldutil_shared.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\compact_lang_det_hint_code.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\compact_lang_det_impl.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\fixunicodevalue.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\generated_language.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\generated_ulscript.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\getonescriptspan.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\integral_types.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\lang_script.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\langspan.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\offsetmap.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\port.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\scoreonescriptspan.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\stringpiece.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\tote.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\utf8acceptinterchange.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\utf8prop_lettermarkscriptnum.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\utf8repl_lettermarklower.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\utf8scannot_lettermarkspecial.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\internal\utf8statetable.h">
+      <Filter>cld2\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\public\compact_lang_det.h">
+      <Filter>cld2\public</Filter>
+    </ClInclude>
+    <ClInclude Include="cld2\public\encodings.h">
+      <Filter>cld2\public</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cld2_deploy.ps1" />
+  </ItemGroup>
+</Project>

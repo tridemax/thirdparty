@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="lemmagen">
+      <UniqueIdentifier>{e225fff8-e246-4df7-a559-70436a811699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lemmagen\source">
+      <UniqueIdentifier>{73acc4c5-0d3b-42cb-ad8d-97e4c989b697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lemmagen\header">
+      <UniqueIdentifier>{f0344481-1a2d-4514-a313-02afb935e732}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="lemmagen\source\BaseAlg.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\BaseNode.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\CmdLineParser.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\CoverNodeAlg.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\JoelRdr.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\JoelTree.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\MiscLib.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\Node.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\RdrLemmatizer.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\RdrLexer.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\RdrParser.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\RdrRule.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\RdrScanner.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\RdrTree.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\Rule.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\Statistics.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\Word.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\WordList.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="lemmagen\source\Xval.cpp">
+      <Filter>lemmagen\source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lemmagen\header\BaseAlg.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\BaseNode.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\CmdLineParser.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\CoverNodeAlg.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\JoelRdr.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\JoelTree.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\MiscLib.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\Node.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\RdrLemmatizer.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\RdrLexer.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\RdrParser.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\RdrRule.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\RdrScanner.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\RdrStatistic.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\RdrTree.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\RdrXval.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\Rule.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\Statistics.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\Word.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\WordList.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+    <ClInclude Include="lemmagen\header\Xval.h">
+      <Filter>lemmagen\header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lemmagen_deploy.ps1" />
+  </ItemGroup>
+</Project>

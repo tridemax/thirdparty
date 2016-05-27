@@ -1,0 +1,5 @@
+Name: postgresql
+Description: 
+Version: 0.1
+Libs: -L"/home/danek/Repos/.build/postgresql_release" -lpostgresql_release
+Cflags: -I""

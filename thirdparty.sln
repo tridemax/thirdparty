@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2857B73E-F847-4B02-9238-064979017E93}") = "postgresql", "postgresql.cproj", "{F3791DA9-93CF-4872-B179-0C2B3F77FE29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3791DA9-93CF-4872-B179-0C2B3F77FE29}.Debug|x64.ActiveCfg = Debug|x64
+		{F3791DA9-93CF-4872-B179-0C2B3F77FE29}.Debug|x64.Build.0 = Debug|x64
+		{F3791DA9-93CF-4872-B179-0C2B3F77FE29}.Release|x64.ActiveCfg = Release|x64
+		{F3791DA9-93CF-4872-B179-0C2B3F77FE29}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+EndGlobal
