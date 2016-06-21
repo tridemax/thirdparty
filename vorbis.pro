@@ -19,7 +19,7 @@ CONFIG(debug, debug|release) {
 TEMPLATE = lib
 CONFIG += staticlib
 CONFIG -= qt
-MAKEFILE = $$_PRO_FILE_PWD_/vorbis_makefile
+MAKEFILE = $$_PRO_FILE_PWD_/vorbis.makefile
 
 #-------------------------------------------------------------------------------------------------
 # warnings

@@ -19,7 +19,7 @@ CONFIG(debug, debug|release) {
 TEMPLATE = lib
 CONFIG += staticlib
 CONFIG -= qt
-MAKEFILE = $$_PRO_FILE_PWD_/mpg123_makefile
+MAKEFILE = $$_PRO_FILE_PWD_/mpg123.makefile
 
 #-------------------------------------------------------------------------------------------------
 # warnings

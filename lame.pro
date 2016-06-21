@@ -19,7 +19,7 @@ CONFIG(debug, debug|release) {
 TEMPLATE = lib
 CONFIG += staticlib
 CONFIG -= qt
-MAKEFILE = $$_PRO_FILE_PWD_/lame_makefile
+MAKEFILE = $$_PRO_FILE_PWD_/lame.makefile
 
 #-------------------------------------------------------------------------------------------------
 # warnings
