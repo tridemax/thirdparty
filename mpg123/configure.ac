@@ -8,16 +8,16 @@ dnl Require autoconf version >= 2.57
 AC_PREREQ(2.57)
 
 dnl ############# Initialisation
-AC_INIT([mpg123], [1.23.3], [maintainer@mpg123.org])
+AC_INIT([mpg123], [1.23.6], [maintainer@mpg123.org])
 dnl Increment API_VERSION when the API gets changes (new functions).
 
 dnl libmpg123
 API_VERSION=42
-LIB_PATCHLEVEL=1
+LIB_PATCHLEVEL=2
 
 dnl libout123
 OUTAPI_VERSION=1
-OUTLIB_PATCHLEVEL=1
+OUTLIB_PATCHLEVEL=4
 
 dnl Since we want to be backwards compatible, both sides get set to API_VERSION.
 LIBMPG123_VERSION=$API_VERSION:$LIB_PATCHLEVEL:$API_VERSION
@@ -1134,8 +1134,6 @@ AC_CHECK_FUNCS( strerror )
 
 AC_CHECK_FUNCS( setlocale nl_langinfo )
 
-AC_CHECK_FUNCS( strdup )
-
 AC_CHECK_FUNCS( atoll )
 
 AC_CHECK_FUNCS( mkfifo, [ have_mkfifo=yes ], [ have_mkfifo=no ] )
@@ -1223,9 +1221,12 @@ if test x"$debugging" = xenabled; then
 	# gcc specific...
 	if test x"$GCC" = xyes; then
 		ADD_CFLAGS="$ADD_CFLAGS -Wall -fno-strict-aliasing"
-		if test x"$nagging" = xenabled; then
-			ADD_CFLAGS="$ADD_CFLAGS -Werror -pedantic -DPLAIN_C89"
-		fi
+	fi
+fi
+# gcc specific...
+if test x"$GCC" = xyes; then
+	if test x"$nagging" = xenabled; then
+		ADD_CFLAGS="$ADD_CFLAGS -Werror -std=c89 -pedantic -DPLAIN_C89"
 	fi
 fi
 

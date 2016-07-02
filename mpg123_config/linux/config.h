@@ -120,7 +120,7 @@
 #define HAVE_LOCALE_H 1
 
 /* Define if libltdl is available */
-/* #undef HAVE_LTDL */
+#define HAVE_LTDL 1
 
 /* Define to 1 if you have the <machine/soundcard.h> header file. */
 /* #undef HAVE_MACHINE_SOUNDCARD_H */
@@ -190,9 +190,6 @@
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #define HAVE_STDLIB_H 1
-
-/* Define to 1 if you have the `strdup' function. */
-#define HAVE_STRDUP 1
 
 /* Define to 1 if you have the `strerror' function. */
 #define HAVE_STRERROR 1
@@ -344,7 +341,7 @@
 #define PACKAGE_NAME "mpg123"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "mpg123 1.23.3"
+#define PACKAGE_STRING "mpg123 1.23.6"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "mpg123"
@@ -353,7 +350,7 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.23.3"
+#define PACKAGE_VERSION "1.23.6"
 
 /* Define if portaudio v18 API is wanted. */
 /* #undef PORTAUDIO18 */
@@ -377,7 +374,7 @@
 #define STDC_HEADERS 1
 
 /* Define if modules are enabled */
-/* #undef USE_MODULES */
+#define USE_MODULES 1
 
 /* Define for new Huffman decoding scheme. */
 #define USE_NEW_HUFFTABLE 1
@@ -386,7 +383,7 @@
 /* #undef USE_YASM_FOR_AVX */
 
 /* Version number of package */
-#define VERSION "1.23.3"
+#define VERSION "1.23.6"
 
 /* Define to use Win32 named pipes */
 /* #undef WANT_WIN32_FIFO */

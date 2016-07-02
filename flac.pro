@@ -42,9 +42,11 @@ QMAKE_CFLAGS += \
 	-std=gnu11 \
 	-m64 \
 	-msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mf16c \
+	-g \
 	-fpic \
 	-fdata-sections \
 	-ffunction-sections \
+	-fno-strict-aliasing \
 	-I$$_PRO_FILE_PWD_/flac/include \
 	-I$$_PRO_FILE_PWD_/flac/src/libFLAC/include \
 	-I$$_PRO_FILE_PWD_/flac_config/linux \

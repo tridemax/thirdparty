@@ -42,9 +42,11 @@ QMAKE_CFLAGS += \
 	-std=gnu11 \
 	-m64 \
 	-msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mf16c \
+	-g \
 	-fpic \
 	-fdata-sections \
 	-ffunction-sections \
+	-fno-strict-aliasing \
 	-I$$_PRO_FILE_PWD_/mpg123/src \
 	-I$$_PRO_FILE_PWD_/mpg123/src/compat \
 	-I$$_PRO_FILE_PWD_/mpg123/src/libmpg123 \
@@ -67,7 +69,6 @@ CONFIG(debug, debug|release) {
 # files
 #-------------------------------------------------------------------------------------------------
 SOURCES += \
-	mpg123/src/libmpg123/compat.c \
 	mpg123/src/libmpg123/dct64.c \
 	mpg123/src/libmpg123/dither.c \
 	mpg123/src/libmpg123/equalizer.c \
@@ -91,4 +92,6 @@ SOURCES += \
 	mpg123/src/libmpg123/synth_real.c \
 	mpg123/src/libmpg123/synth_s32.c \
 	mpg123/src/libmpg123/tabinit.c \
-	mpg123/src/libmpg123/synth_8bit.c
+	mpg123/src/libmpg123/synth_8bit.c \
+    mpg123/src/compat/compat_str.c \
+    mpg123/src/compat/compat.c

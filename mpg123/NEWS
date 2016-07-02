@@ -1,3 +1,62 @@
+1.23.6
+------
+- call out123_pause() instead of out123_stop() in remote control STOP
+  command, fixing the regression in 1.23.x of not being able to resume
+  playback with a nother LOAD unless the new track has differing audio
+  format (bug 234)
+
+1.23.5
+------
+- libout123:
+-- fix build of portaudio and SDL on win32 (too many parentheses,
+   thanks to Sandro Cumerlato for pointing it out)
+-- make out123_errcode() return OUT123_BAD_HANDLE as documented
+   (adding that value to the error enum, was documented but missing),
+   again thanks to Sandro
+- fix windows-builds.sh (shell quoting in copying stage) and add some
+  bits to shipped header to make it directly usable in MSVC (define ssize_t,
+  bug 232)
+- no overwriting of LIBS in Makefile (build system regression in 1.23,
+  thanks to Peter Korsgaard for reporting that one)
+- no printing of message in response to SIGPIPE, as that could trigger
+  a hang if stderr itself is the piped culprit (regression from 1.22, bug 233)
+
+1.23.4
+------
+- mpg123: Fix logic of prebuffering small bits for glitch-free start of
+  playback. The logic as introduced in 1.23.0 actually introduced stuttering!
+  The fix for this is really minimal and I urge everyone to at least include
+  that one. It is the changeset of rev. 4041.
+- libout123:
+-- Actually make OUT123_KEEP_PLAYING on by default, as documented.
+-- Fix buffer logic with regard to draining, use common device writing
+   code to handle resuming from pause. This fixes sdl output with buffer,
+   possibly other sfifo-based outputs like CoreAudio (those were poorly
+   tested with buffer, as the combination is indeed unusual, see bug 230).
+-- Buffer pauses devices for prebuffering, to avoid underruns.
+-- More reliable playback with SDL, Portaudio and CoreAudio outputs.
+   This includes FIFO draining on close to avoid dropping of the end.
+   It should fix parts of bug 230.
+-- Fixed memory leaks with some outputs where a call to the deinit()
+   function is necessary during available/working module checking.
+- mpg123, out123: Use the default output flags to get OUT123_KEEP_PLAYING.
+  Without this, there is a good chance to abort on SIGSTOP/CONT while playing.
+  This is a regression from 1.22 .
+- Build fixes (bugs 227 and 228) and some build system hackery.
+  Gone are libc feature test macros in compat.h . This means always
+  using our own strdup() implementation. Simpler than being bugged by
+  feature test macros in strict compiler mode (when _DEFAULT_SOURCE is not
+  defined).
+- ./configure --enable-nagging does something also without --enable-debug,
+  explictly triggers -std=c89, too (hence the above).
+- Some fixup to make things work in pedantic C89 mode again.
+  It really might be time to swich on some serious C99 for the next release,
+  since there's a followup standard to _that_ which we can ignore now.
+- Update list of renamed internal symbols to reduce conflicts during static
+  linking of libmpg123 or libout123.
+- Internal compatibility functions now handled via libtool convenience
+  archives, avoiding the hackish code copies.
+
 1.23.3:
 -------
 - mpg123: Man page fixes by ESR.

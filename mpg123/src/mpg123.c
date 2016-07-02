@@ -169,7 +169,7 @@ static void catch_interrupt(void)
 }
 static void handle_fatal_msg(const char *msg, size_t n)
 {
-	if(!param.quiet)
+	if(msg && !param.quiet)
 		write(STDERR_FILENO, msg, n);
 	intflag = TRUE;
 	deathflag = TRUE;
@@ -181,8 +181,9 @@ static void catch_fatal_term(void)
 }
 static void catch_fatal_pipe(void)
 {
-	const char msg[] = "\nmpg123: death by SIGPIPE\n";
-	handle_fatal_msg(msg, sizeof(msg));
+	/* If the SIGPIPE is because of piped stderr, trying to write
+	   in the signal handler hangs the program. */
+	handle_fatal_msg(NULL, 0);
 }
 #endif
 
@@ -827,7 +828,7 @@ int play_frame(void)
 		   I wonder if that makes us miss errors. Actual issues should
 		   just be postponed. */
 		if(bytes && !intflag) /* Previous piece could already be interrupted. */
-		if(out123_play(ao, audio, bytes) < bytes && !intflag)
+		if(out123_play(ao, playbuf, bytes) < bytes && !intflag)
 		{
 			error("Deep trouble! Cannot flush to my output anymore!");
 			safe_exit(133);
@@ -963,7 +964,7 @@ int main(int sys_argc, char ** sys_argv)
 	win32_net_init();
 #endif
 
-	if(!(fullprogname = strdup(argv[0])))
+	if(!(fullprogname = compat_strdup(argv[0])))
 	{
 		error("OOM"); /* Out Of Memory. Don't waste bytes on that error. */
 		safe_exit(1);
@@ -1013,6 +1014,12 @@ int main(int sys_argc, char ** sys_argv)
 	param.flags |= MPG123_SEEKBUFFER; /* Default on, for HTTP streams. */
 	mpg123_getpar(mp, MPG123_RESYNC_LIMIT, &param.resync_limit, NULL);
 	mpg123_getpar(mp, MPG123_PREFRAMES, &param.preframes, NULL);
+	/* Also need proper default flags from libout123. */
+	{
+		out123_handle *paro = out123_new();
+		out123_getparam_int(paro, OUT123_FLAGS, &param.output_flags);
+		out123_del(paro);
+	}
 
 #ifdef OS2
         _wildcard(&argc,&argv);

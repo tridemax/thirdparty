@@ -68,7 +68,7 @@ static int w32_priority = 0;
 #endif
 static int aggressive = FALSE;
 static double preload = 0.2;
-static int outflags = 0;
+static long outflags = 0;
 static long gain = -1;
 static const char *name = NULL; /* Let the out123 library choose "out123". */
 static double device_buffer; /* output device buffer */
@@ -492,7 +492,7 @@ int main(int sys_argc, char ** sys_argv)
 	argc = sys_argc;
 #endif
 
-	if(!(fullprogname = strdup(argv[0])))
+	if(!(fullprogname = compat_strdup(argv[0])))
 	{
 		error("OOM"); /* Out Of Memory. Don't waste bytes on that error. */
 		safe_exit(1);
@@ -510,6 +510,13 @@ int main(int sys_argc, char ** sys_argv)
 	{
 		cmd_name = fullprogname; /* No path separators there. */
 		binpath = NULL; /* No path at all. */
+	}
+
+	/* Get default flags. */
+	{
+		out123_handle *paro = out123_new();
+		out123_getparam_int(paro, OUT123_FLAGS, &outflags);
+		out123_del(paro);
 	}
 
 #ifdef OS2

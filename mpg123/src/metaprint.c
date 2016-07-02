@@ -29,6 +29,10 @@ static const char* name[FIELDS] =
    see print_id3 for what goes left or right.
    Choose namelen[0] >= namelen[1]! */
 static const int namelen[2] = {7, 6};
+/* Overhead is Name + ": " and also plus "  " for right column. */
+/* pedantic C89 does not like:
+const int overhead[2] = { namelen[0]+2, namelen[1]+4 }; */
+static const int overhead[2] = { 9, 10 };
 
 static void utf8_ascii(mpg123_string *dest, mpg123_string *source);
 /* Copy UTF-8 string or melt it down to ASCII, also returning the character length. */
@@ -76,7 +80,8 @@ static void print_oneline( FILE* out
 
 	if(long_mode)
 		fprintf(out, "\t");
-	snprintf(fmt, sizeof(fmt)-1, "%%s:%%-%ds%%s\n", 1+namelen[0]-strlen(name[fi]));
+	snprintf( fmt, sizeof(fmt)-1, "%%s:%%-%ds%%s\n"
+	,	1+namelen[0]-(int)strlen(name[fi]) );
 	fprintf(out, fmt, name[fi], " ", tag[fi].fill ? tag[fi].p : "");
 }
 
@@ -112,8 +117,8 @@ static void print_pair
 
 		/* Two-column format string with added padding for multibyte chars. */
 		snprintf( cfmt, sizeof(cfmt)-1, "%%s:%%-%ds%%-%ds  %%s:%%-%ds%%-%ds\n"
-		,	1+namelen[0]-strlen(name[f0]), climit[0]+chardiff[0]
-		,	1+namelen[1]-strlen(name[f1]), climit[1]+chardiff[1] );
+		,	1+namelen[0]-(int)strlen(name[f0]), climit[0]+chardiff[0]
+		,	1+namelen[1]-(int)strlen(name[f1]), climit[1]+chardiff[1] );
 		/* Actual printout of name and value pairs. */
 		fprintf(out, cfmt, name[f0], " ", tag[f0].p, name[f1], " ", tag[f1].p);
 	}
@@ -307,8 +312,6 @@ void print_id3_tag(mpg123_handle *mh, int long_id3, FILE *out)
 		   So we will skip tags not set, and try to show them in two parallel
 		   columns if they are short, which is by far the most common case. */
 		int linelimit;
-		/* Overhead is Name + ": " and also plus "  " for right column. */
-		const int overhead[2] = { namelen[0]+2, namelen[1]+4 };
 		int climit[2];
 
 		/* Adapt formatting width to terminal if possible. */

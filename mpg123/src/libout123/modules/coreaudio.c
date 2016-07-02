@@ -23,8 +23,10 @@
 #include "debug.h"
 
 /* Duration of the ring buffer in seconds.
-   Is that all that there is to tunable latency? */
-#define FIFO_DURATION (ao->device_buffer > 0. ? ao->device_buffer : 0.5)
+   Is that all that there is to tunable latency?
+   Size of 200 ms should be enough for a default value, rare is the
+   hardware that actually allows such large buffers. */
+#define FIFO_DURATION (ao->device_buffer > 0. ? ao->device_buffer : 0.2)
 
 
 typedef struct mpg123_coreaudio
@@ -35,10 +37,9 @@ typedef struct mpg123_coreaudio
 	char play;
 	int channels;
 	int bps;
-	int last_buffer;
 	int play_done;
 	int decode_done;
-	
+
 	/* Convertion buffer */
 	unsigned char * buffer;
 	size_t buffer_size;
@@ -56,42 +57,49 @@ static OSStatus playProc(AudioConverterRef inAudioConverter,
                          AudioStreamPacketDescription **outDataPacketDescription,
                          void* inClientData)
 {
-	mpg123_coreaudio_t *ca = (mpg123_coreaudio_t *)inClientData;
+	out123_handle *ao = (out123_handle*)inClientData;
+	mpg123_coreaudio_t *ca = (mpg123_coreaudio_t *)ao->userptr;
 	long n;
-	
-	
-	if(ca->last_buffer) {
-		ca->play_done = 1;
-		return noErr;
-	}
-	
+
+	/* This is not actually a loop. See the early break. */
 	for(n = 0; n < outOutputData->mNumberBuffers; n++)
 	{
 		unsigned int wanted = *ioNumberDataPackets * ca->channels * ca->bps;
 		unsigned char *dest;
 		unsigned int read;
+		int avail;
+
+		/* Any buffer count > 1 would wreck havoc with this code. */
+		if(n > 0)
+			break;
+
 		if(ca->buffer_size < wanted) {
 			debug1("Allocating %d byte sample conversion buffer", wanted);
 			ca->buffer = realloc( ca->buffer, wanted);
 			ca->buffer_size = wanted;
 		}
 		dest = ca->buffer;
-		
+		if(!dest)
+			return -1;
+
 		/* Only play if we have data left */
-		if ( sfifo_used( &ca->fifo ) < wanted ) {
-			if(!ca->decode_done) {
-				warning("Didn't have any audio data in callback (buffer underflow)");
-				return -1;
-			}
-			wanted = sfifo_used( &ca->fifo );
-			ca->last_buffer = 1;
+		while((avail=sfifo_used( &ca->fifo )) < wanted && !ca->decode_done)
+		{
+			int ms = (wanted-avail)/ao->framesize*1000/ao->rate;
+			debug3("waiting for more input, %d ms missing (%i < %u)"
+			,	ms, avail, wanted);
+			usleep(ms*100); /* Wait for 1/10th of the missing duration. Might want to adjust. */
 		}
+		if(avail > wanted)
+			avail = wanted;
+		else if(ca->decode_done)
+			ca->play_done = 1;
+
+		/* Read audio from FIFO to CoreAudio's buffer */
+		read = sfifo_read(&ca->fifo, dest, avail);
 		
-		/* Read audio from FIFO to SDL's buffer */
-		read = sfifo_read( &ca->fifo, dest, wanted );
-		
-		if (wanted!=read)
-			warning2("Error reading from the ring buffer (wanted=%u, read=%u).\n", wanted, read);
+		if(read!=avail)
+			warning2("Error reading from the ring buffer (avail=%u, read=%u).\n", avail, read);
 		
 		outOutputData->mBuffers[n].mDataByteSize = read;
 		outOutputData->mBuffers[n].mData = dest;
@@ -105,7 +113,8 @@ static OSStatus convertProc(void *inRefCon, AudioUnitRenderActionFlags *inAction
                             UInt32 inNumFrames, AudioBufferList *ioData)
 {
 	AudioStreamPacketDescription* outPacketDescription = NULL;
-	mpg123_coreaudio_t* ca = (mpg123_coreaudio_t*)inRefCon;
+	out123_handle *ao = (out123_handle*)inRefCon;
+	mpg123_coreaudio_t *ca = (mpg123_coreaudio_t *)ao->userptr;
 	OSStatus err= noErr;
 	
 	err = AudioConverterFillComplexBuffer(ca->converter, playProc, inRefCon, &inNumFrames, ioData, outPacketDescription);
@@ -128,10 +137,8 @@ static int open_coreaudio(out123_handle *ao)
 	ca->play = 0;
 	ca->buffer = NULL;
 	ca->buffer_size = 0;
-	ca->last_buffer = 0;
 	ca->play_done = 0;
 	ca->decode_done = 0;
-
 	
 	/* Get the default audio output unit */
 	desc.componentType = kAudioUnitType_Output; 
@@ -219,7 +226,7 @@ static int open_coreaudio(out123_handle *ao)
 	/* Add our callback - but don't start it yet */
 	memset(&renderCallback, 0, sizeof(AURenderCallbackStruct));
 	renderCallback.inputProc = convertProc;
-	renderCallback.inputProcRefCon = ao->userptr;
+	renderCallback.inputProcRefCon = ao;
 	if(AudioUnitSetProperty(ca->outputUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &renderCallback, sizeof(AURenderCallbackStruct)))
 	{
 		if(!AOQUIET)
@@ -265,32 +272,37 @@ static int get_formats_coreaudio(out123_handle *ao)
 static int write_coreaudio(out123_handle *ao, unsigned char *buf, int len)
 {
 	mpg123_coreaudio_t* ca = (mpg123_coreaudio_t*)ao->userptr;
-	int written;
+	int len_remain = len;
 
-	/* If there is no room, then sleep for half the length of the FIFO */
-	while (sfifo_space( &ca->fifo ) < len ) {
-		usleep( (FIFO_DURATION/2) * 1000000 );
-	}
-	
-	/* Store converted audio in ring buffer */
-	written = sfifo_write( &ca->fifo, (char*)buf, len);
-	if (written != len) {
-		warning( "Failed to write audio to ring buffer" );
-		return -1;
-	}
-	
-	/* Start playback now that we have something to play */
-	if(!ca->play)
+	/* Some busy waiting, but feed what is possible. */
+	while(len_remain) /* Note: input len is multiple of framesize! */
 	{
-		if(AudioOutputUnitStart(ca->outputUnit))
+		int block = sfifo_space(&ca->fifo);
+		block -= block % ao->framesize;
+		if(block > len_remain)
+			block = len_remain;
+		if(block)
 		{
-			if(!AOQUIET)
-				error("AudioOutputUnitStart failed");
-			return(-1);
+			sfifo_write(&ca->fifo, buf, block);
+			len_remain -= block;
+			buf += block;
+			/* Start playback now that we have something to play */
+			if(!ca->play && (sfifo_used(&ca->fifo) > (sfifo_size(&ca->fifo)/2)))
+			{
+				if(AudioOutputUnitStart(ca->outputUnit))
+				{
+					if(!AOQUIET)
+						error("AudioOutputUnitStart failed");
+					return(-1);
+				}
+				ca->play = 1;
+			}
 		}
-		ca->play = 1;
+		/* If there is no room, then sleep for a bit, but not too long. */
+		if(len_remain)
+			usleep( (0.1*FIFO_DURATION) * 1000000 );
 	}
-	
+
 	return len;
 }
 
@@ -300,8 +312,8 @@ static int close_coreaudio(out123_handle *ao)
 
 	if (ca) {
 		ca->decode_done = 1;
-		while(!ca->play_done && ca->play) usleep(10000);
-		
+		while(!ca->play_done && ca->play)
+			usleep((0.1*FIFO_DURATION)*1000000);
 		/* No matter the error code, we want to close it (by brute force if necessary) */
 		AudioConverterDispose(ca->converter);
 		AudioOutputUnitStop(ca->outputUnit);

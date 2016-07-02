@@ -15,10 +15,14 @@
 #define MPG123_COMPAT_H
 
 #include "config.h"
+#include "intsym.h"
 
-/* Needed for strdup(), in strict mode ... */
-#ifndef _XOPEN_SOURCE
-#define _XOPEN_SOURCE 500
+/* For --nagging compilation with -std=c89, we need
+   to disable the inline keyword. */
+#ifdef PLAIN_C89
+#ifndef inline
+#define inline
+#endif
 #endif
 
 #include <errno.h>
@@ -107,9 +111,9 @@ void *safe_realloc(void *ptr, size_t size);
 const char *strerror(int errnum);
 #endif
 
-#ifndef HAVE_STRDUP
-char *strdup(const char *s);
-#endif
+/* Roll our own strdup() that does not depend on libc feature test macros
+   and returns NULL on NULL input instead of crashing. */
+char* compat_strdup(const char *s);
 
 /* If we have the size checks enabled, try to derive some sane printfs.
    Simple start: Use max integer type and format if long is not big enough.
@@ -147,6 +151,10 @@ typedef long ssize_p;
  */
 int compat_open(const char *filename, int flags);
 FILE* compat_fopen(const char *filename, const char *mode);
+/**
+ * Also fdopen to avoid having to define POSIX macros in various source files.
+ */
+FILE* compat_fdopen(int fd, const char *mode);
 
 /**
  * Closing a file handle can be platform specific.
