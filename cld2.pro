@@ -1,18 +1,30 @@
 
-QT       -= core gui
-
 CONFIG(debug, debug|release) {
+	message("cld2_debug")
+
 	TARGET = cld2_debug
+
+	DESTDIR = $$_PRO_FILE_PWD_/../.dist
+	OBJECTS_DIR = $$_PRO_FILE_PWD_/../.int/cld2_debug
+
 } else {
-	TARGET = cld2_release
+	message("cld2_release")
+
+	TARGET = cld2
+
+	DESTDIR = $$_PRO_FILE_PWD_/../.dist
+	OBJECTS_DIR = $$_PRO_FILE_PWD_/../.int/cld2_release
 }
 
 TEMPLATE = lib
-CONFIG += staticlib
+CONFIG += staticlib c++14
+CONFIG -= qt
+QT -= core gui
+MAKEFILE = $$_PRO_FILE_PWD_/cld2.makefile
 
-OBJECTS_DIR = ./
-DESTDIR = $$_PRO_FILE_PWD_/../_dist/lib
-
+#-------------------------------------------------------------------------------------------------
+# warnings
+#-------------------------------------------------------------------------------------------------
 QMAKE_CXXFLAGS_WARN_ON += \
 	-Wno-parentheses \
 	-Wno-unused-variable \
@@ -27,18 +39,22 @@ QMAKE_CXXFLAGS_WARN_ON += \
 	-Wno-conversion-null \
 	-Wno-write-strings
 
+#-------------------------------------------------------------------------------------------------
+# compiler flags
+#-------------------------------------------------------------------------------------------------
 QMAKE_CXXFLAGS += \
 	-m64 \
-	-msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mf16c
+	-msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mf16c \
+	-g \
+	-fpic \
+	-fdata-sections \
+	-ffunction-sections \
+	-fno-strict-aliasing
 
 CONFIG(debug, debug|release) {
-	message("This is debug.")
-
-	DEFINES += _DEBUG
+	DEFINES += _DEBUG DEBUG
 
 } else {
-	message("This is release.")
-
 	DEFINES += NDEBUG
 
 	QMAKE_CFLAGS_RELEASE -= -O0 -O1 -O2
@@ -48,6 +64,9 @@ CONFIG(debug, debug|release) {
 	QMAKE_CXXFLAGS_RELEASE *= -O3
 }
 
+#-------------------------------------------------------------------------------------------------
+# files
+#-------------------------------------------------------------------------------------------------
 HEADERS += \
     cld2/internal/cld2_dynamic_compat.h \
     cld2/internal/cld2_dynamic_data.h \

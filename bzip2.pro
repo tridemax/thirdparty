@@ -1,18 +1,30 @@
 
-QT       -= core gui
-
 CONFIG(debug, debug|release) {
+	message("bzip2_debug")
+
 	TARGET = bzip2_debug
+
+	DESTDIR = $$_PRO_FILE_PWD_/../.dist
+	OBJECTS_DIR = $$_PRO_FILE_PWD_/../.int/bzip2_debug
+
 } else {
-	TARGET = bzip2_release
+	message("bzip2_release")
+
+	TARGET = bzip2
+
+	DESTDIR = $$_PRO_FILE_PWD_/../.dist
+	OBJECTS_DIR = $$_PRO_FILE_PWD_/../.int/bzip2_release
 }
 
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG -= qt
+QT -= core gui
+MAKEFILE = $$_PRO_FILE_PWD_/bzip2.makefile
 
-OBJECTS_DIR = ./
-DESTDIR = $$_PRO_FILE_PWD_/../_dist/lib
-
+#-------------------------------------------------------------------------------------------------
+# warnings
+#-------------------------------------------------------------------------------------------------
 QMAKE_CFLAGS_WARN_ON += \
 	-Wno-parentheses \
 	-Wno-unused-variable \
@@ -21,23 +33,26 @@ QMAKE_CFLAGS_WARN_ON += \
 	-Wno-unused-but-set-variable \
 	-Wno-pointer-sign \
 	-Wno-sign-compare \
-	-Wno-unused-function
+	-Wno-unused-function \
+	-Wno-maybe-uninitialized
 
+#-------------------------------------------------------------------------------------------------
+# compiler flags
+#-------------------------------------------------------------------------------------------------
 QMAKE_CFLAGS += \
 	-m64 \
-	-msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mf16c
+	-msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mf16c \
+	-g \
+	-fpic \
+	-fdata-sections \
+	-ffunction-sections \
+	-fno-strict-aliasing
 
 CONFIG(debug, debug|release) {
-	message("This is debug.")
-
 	DEFINES += _DEBUG DEBUG
 
 } else {
-	message("This is release.")
-
 	DEFINES += NDEBUG
-
-	QMAKE_CFLAGS += -include $$_PRO_FILE_PWD_/_alloc_redefine.h
 
 	QMAKE_CFLAGS_RELEASE -= -O0 -O1 -O2
 	QMAKE_CFLAGS_RELEASE *= -O3
@@ -46,6 +61,9 @@ CONFIG(debug, debug|release) {
 	QMAKE_CXXFLAGS_RELEASE *= -O3
 }
 
+#-------------------------------------------------------------------------------------------------
+# files
+#-------------------------------------------------------------------------------------------------
 HEADERS += \
     bzip2/bzlib.h \
     bzip2/bzlib_private.h
